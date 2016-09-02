@@ -1,37 +1,12 @@
-/**
- Neo4j前端操作插件；
- * 提供了example的html与js实例；
- * example中引用了jquery和本模块的neo4j-rest.js文件
- @module Svg
- */
-
 (function () {
     'use strict';
 
-    /**
-     * 使用jQuery的Ajax框架实现对Neo4j数据库进行Rest操作。
-     * <br>
-     * <p>必须引入的脚本和样式：</p>
-     * <p>
-     * <code>
-     * &lt;!-- jquery --&gt;<br />&lt;script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"&gt;&lt;/script&gt;<br />&lt;!-- goforce--&gt;<br />&lt;script src="../assets/res/neo4j-rest.js"&gt;&lt;/script&gt;
-     * </code>
-     * </p>
-     * @class RentiMap
-     * @constructor
-     * @param  {string} restAPI Neo4j库的Rest服务地址。例：http://192.168.10.9:7474
-     * @param {string} [authorization] The authorization header will be generated and added as a custom header.
-     * @return {RentiMap} the augmented object.
-     *
-     * @demo neo4j/db_data.html {db_data}
-     * @demo neo4j/db_manage.html {db_manage}
-     */
     var RentiMap = function (element, options) {
         options = $.extend({}, defaults, options || {});
 
         var panZoom;
 
-        var $popover = $('<div class="popover" transition="modal" style="position:absolute;left:50%; top:50%;margin-left:-135px;margin-top:-200px;"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>');
+        var $popover = $('<div class="popover-box"><div class="popover" transition="modal"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div></div>');
         $(element).after($popover);
 
         var animate = '<animate attributeName="stroke-width" attributeType="XML"	values="2;10;2"	begin="0s" dur="2s"	repeatCount="indefinite"/>'
@@ -111,7 +86,7 @@
             var $jingluo = $("#jingluo");
             var $xuewei = $("#xuewei");
 
-            $xuewei.children().click(function () {
+            function clickXuewei() {
                 var xwid = $(this).attr('id');
                 var data = xuewei[xwid];
 
@@ -121,9 +96,13 @@
                 content += "<p><strong>穴位主治：</strong>" + (data.zhu_zhi ? data.zhu_zhi : "") + "</p>";
 
                 showPopover(title, content);
-            });
+            }
 
-            $jingluo.children().click(function () {
+            //$xuewei.children().on("tap", clickXuewei);
+            $xuewei.children().on("click", clickXuewei);
+
+            function clickJingluo() {
+
                 var jlid = $(this).attr('id');
                 var data = jingluo[jlid];
 
@@ -133,8 +112,10 @@
                 content += "<p><strong>功能：</strong>" + data.gong_neng + "</p>";
 
                 showPopover(title, content);
+            }
 
-            });
+            //$jingluo.children().on("tap", clickJingluo);
+            $jingluo.children().on("click", clickJingluo);
 
             // 是否显示经络
             if (!options.jingluo) {
@@ -159,33 +140,32 @@
         function showPopover(title, content) {
             $popover.find('.popover-title').html(title);
             $popover.find('.popover-content').html(content);
-            $popover.show();
+            $popover.css('display', 'flex');
+            //$popover.find(".popover").animate({width: "80%", height: "70%"}, "fast", "swing", function () {});
         }
 
         function hidePopover() {
-            $popover.hide();
+//          $popover.find(".popover").animate({width: "0px", height: "0px"}, "fast", "swing", function () {
+//              $popover.css('display', 'none');
+//          });
+			$popover.css('display', 'none');
         }
 
-        window.onclick = function () {
+		function clickPopover() {
+			hidePopover();
+			return;
             var ele = event.srcElement || event.target;
             var className = $(ele).attr('class');
-
-            console.log(ele);
 
             if ($(ele).parents('#jingluo').length > 0)
                 return;
 
-            var popover = $popover[0];
-            var x = event.clientX;
-            var y = event.clientY;
-            var divx1 = popover.offsetLeft;
-            var divy1 = popover.offsetTop;
-            var divx2 = popover.offsetLeft + popover.offsetWidth;
-            var divy2 = popover.offsetTop + popover.offsetHeight;
-            if (x < divx1 || x > divx2 || y < divy1 || y > divy2) {
+            if ($(ele).parents('.popover').length == 0) {
                 hidePopover();
             }
-        };
+        }
+		//$popover.on("tap",clickPopover);
+		$popover.on("click",clickPopover);
 
     };
 
