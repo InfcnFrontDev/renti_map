@@ -1,0 +1,14 @@
+{
+  "name": "renti_map2",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "https://github.com/vuejs/vue",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "vue": "^1.0.26",
+    "svg-pan-zoom": "^3.2.9",
+    "jquery": "^3.1.0",
+    "d3": "^3.5.17"
+  }
+}

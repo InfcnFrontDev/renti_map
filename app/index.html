@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8"/>
+    <title>renti_map2</title>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/vue/dist/vue.js"></script>
+    <script src="vendor/svg-pan-zoom/dist/svg-pan-zoom.js"></script>
+    <script src="vendor/d3/d3.js"></script>
+    <link rel="stylesheet" href="assets/app.css">
+</head>
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>人体穴位图</title>
-		<script src="js/d3.v3.min.js"></script>
-		<script src="js/topojson.v1.min.js"></script>
-		<script src="js/d3.geo.js"></script>
-		<link rel="stylesheet" href="css/map.css" />
-	</head>
+<body>
+<!--
+    map: 指定svg目录中的地图文件;
+    jingluo: 是否显示经络，true:显示，false:不显示;
+    xuewei: 是否显示穴位，true:显示，false:不显示;
+    disease: 疾病，（血压高、痴呆、中风...）
+-->
+<rentimap map="fudaye_front.svg" jingluo="false" xuewei="false" disease="痴呆"></rentimap>
 
-	<body>
-		<div id="popover" class="popover">
-			<div class="arrow"></div>
-			<h3 class="popover-title"></h3>
-			<div class="popover-content"></div>
-		</div>
-		<script src="js/map.js"></script>
-	</body>
-
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
 </html>

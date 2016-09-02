@@ -9,7 +9,7 @@ var webpack = require('gulp-webpack');
 //创建watch任务去检测html文件,其定义了当html改动之后，去调用一个Gulp的Task
 gulp.task('watch', function () {
   livereload.listen();
-  gulp.watch(['./app/**/*.*','!./app/libs/**/*.*'], function(file){
+  gulp.watch(['./app/**/*.*','!./app/vendor/**/*.*'], function(file){
     livereload.changed(file.path);
   });
 });
