@@ -1,10 +1,7 @@
 //引入插件
 var gulp = require('gulp');
 var connect = require('gulp-connect');
-var bower = require('gulp-bower');
 var livereload = require('gulp-livereload');
-var webpack = require('gulp-webpack');
-
 
 //创建watch任务去检测html文件,其定义了当html改动之后，去调用一个Gulp的Task
 gulp.task('watch', function () {

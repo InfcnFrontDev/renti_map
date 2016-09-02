@@ -1,4 +1,4 @@
-# renti_map2
+# renti_map
 
 > 人体经络穴位地图(第二版)
 
@@ -6,7 +6,7 @@
 
 ``` bash
 # clone repo
-git clone https://github.com/kecoyo/renti_map2.git
+git clone https://github.com/InfcnFrontDev/renti_map.git
 
 # install dependencies
 npm install
